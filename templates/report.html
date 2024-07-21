@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Report</h1>
+{% if status == 'success' %}
+    <p>Password for {{ username }} is strong and stored successfully.</p>
+{% elif status == 'fail' %}
+    <p>Password for {{ username }} is weak. Please try again.</p>
+    <ul>
+    {% for error in errors %}
+        <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+{% elif status == 'warning' %}
+    <p>Three consecutive failed attempts for {{ username }}. Please try again later.</p>
+{% endif %}
+<a href="{{ url_for('index') }}">Go back</a>
+{% endblock %}
